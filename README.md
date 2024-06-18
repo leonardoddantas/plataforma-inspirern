@@ -1,19 +1,19 @@
-# Plataforma de Turismo do Rio Grande do Norte
+# 🌟 Plataforma de Turismo do Rio Grande do Norte 🌴
 
 ## Descrição
 Bem-vindo à Plataforma de Turismo do Rio Grande do Norte! Esta plataforma tem como objetivo promover o turismo no Rio Grande do Norte, Brasil, oferecendo um espaço onde pequenos, médios e grandes empreendedores podem divulgar seus negócios, como restaurantes, pousadas, lanchonetes, e muito mais. Todos os cadastros passam por um processo de análise antes de serem publicados, garantindo a qualidade e confiabilidade das informações.
 
 ## Funcionalidades
-- **Cadastro de Negócios**: Proprietários podem registrar seus negócios fornecendo informações detalhadas e imagens.
-- **Sistema de Aprovação**: Administradores podem revisar, aprovar ou rejeitar cadastros submetidos.
-- **Visualização de Pontos Turísticos**: Listagem e detalhes de diversos pontos turísticos do Rio Grande do Norte.
-- **Upload de Imagens e Documentos**: Suporte para envio de fotos do negócio e documentos de verificação.
-- **Notificação de Status**: Usuários são notificados sobre o status do seu cadastro (pendente, aprovado, rejeitado).
+- **📋 Cadastro de Negócios**: Proprietários podem registrar seus negócios fornecendo informações detalhadas e imagens.
+- **🔍 Sistema de Aprovação**: Administradores podem revisar, aprovar ou rejeitar cadastros submetidos.
+- **🏞️ Visualização de Pontos Turísticos**: Listagem e detalhes de diversos pontos turísticos do Rio Grande do Norte.
+- **📷 Upload de Imagens e Documentos**: Suporte para envio de fotos do negócio e documentos de verificação.
+- **📬 Notificação de Status**: Usuários são notificados sobre o status do seu cadastro (pendente, aprovado, rejeitado).
 
 ## Tecnologias Utilizadas
-- **Frontend**: HTML, CSS, JavaScript
-- **Backend**: PHP, Laravel
-- **Banco de Dados**: MySQL
+- **💻 Frontend**: HTML, CSS, JavaScript
+- **🔧 Backend**: PHP, Laravel
+- **💾 Banco de Dados**: MySQL
 
 ## Instalação
 Para rodar este projeto localmente, siga os passos abaixo:
@@ -33,19 +33,18 @@ Para rodar este projeto localmente, siga os passos abaixo:
 4. Gere a chave da aplicação
      ```bash
      php artisan key:generate
+5. Execute as migrações para criar as tabelas no banco de dados
+   ```bash
+   php artisan migrate
 
-5 . Execute as migrações para criar as tabelas no banco de dados
-
-    php artisan migrate
-   
 6. Instale as dependências do npm
-    ```bash
-    npm install
+   ```bash
+   php artisan migrate
 
-7 . Compile os assets
-
-    npm run dev
+7. Compile os assets
+   ```bash
+   npm run dev
 
 8. Inicie o servidor de desenvolvimento
-    ```bash
+   ```bash
     php artisan serve
