@@ -12,9 +12,8 @@ Bem-vindo à Plataforma de Turismo do Rio Grande do Norte! Esta plataforma tem c
 
 ## Tecnologias Utilizadas
 - **Frontend**: HTML, CSS, JavaScript
-- **Backend**: [Especifique a linguagem e framework utilizados, por exemplo, Node.js, Django, etc.]
-- **Banco de Dados**: [Especifique o banco de dados utilizado, por exemplo, MySQL, MongoDB, etc.]
-- **Outras Ferramentas**: [Especifique outras tecnologias ou ferramentas utilizadas, por exemplo, Bootstrap, jQuery, etc.]
+- **Backend**: PHP, Laravel
+- **Banco de Dados**: MySQL
 
 ## Instalação
 Para rodar este projeto localmente, siga os passos abaixo:
@@ -24,22 +23,29 @@ Para rodar este projeto localmente, siga os passos abaixo:
    git clone https://github.com/seu-usuario/nome-do-repositorio.git
 
 2. Navegue até o diretório do projeto
+    ```bash
    cd nome-do-repositorio
 
 3. Instale as dependências do projeto
-   composer install
+    ```bash
+    composer install
 
- 4. Gere a chave da aplicação
-    php artisan key:generate
+4. Gere a chave da aplicação
+     ```bash
+     php artisan key:generate
 
-5. Execute as migrações para criar as tabelas no banco de dados
-   php artisan migrate
+5 . Execute as migrações para criar as tabelas no banco de dados
+
+    php artisan migrate
    
 6. Instale as dependências do npm
-   npm install
+    ```bash
+    npm install
 
-7. Compile os assets
-   npm run dev
+7 . Compile os assets
+
+    npm run dev
 
 8. Inicie o servidor de desenvolvimento
-   php artisan serve
+    ```bash
+    php artisan serve
