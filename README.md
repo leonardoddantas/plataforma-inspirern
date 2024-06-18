@@ -48,4 +48,3 @@ Para rodar este projeto localmente, siga os passos abaixo:
 8. Inicie o servidor de desenvolvimento
    ```bash
     php artisan serve
->>>>>>> bb3ffdf44e52c7e8e1fbcb86836fb5667d63d984
