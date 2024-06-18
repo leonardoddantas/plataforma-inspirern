@@ -20,11 +20,11 @@ Para rodar este projeto localmente, siga os passos abaixo:
 
 1. Clone o repositório
    ```bash
-   git clone https://github.com/seu-usuario/nome-do-repositorio.git
+   git clone https://github.com/leonardoddantas/plataforma-inspirern.git
 
 2. Navegue até o diretório do projeto
     ```bash
-   cd nome-do-repositorio
+   cd plataforma-inspirern
 
 3. Instale as dependências do projeto
     ```bash
