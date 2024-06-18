@@ -39,7 +39,7 @@ Para rodar este projeto localmente, siga os passos abaixo:
 
 6. Instale as dependências do npm
    ```bash
-   php artisan migrate
+   npm install
 
 7. Compile os assets
    ```bash
