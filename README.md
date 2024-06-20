@@ -15,6 +15,11 @@ Bem-vindo à Plataforma de Turismo do Rio Grande do Norte! Esta plataforma tem c
 - **🔧 Backend**: PHP, Laravel
 - **💾 Banco de Dados**: MySQL
 
+##Requisitos
+* PHP 8.2 ou superior
+* Composer
+* Node.js 20 ou superior 
+
 ## Instalação
 Para rodar este projeto localmente, siga os passos abaixo:
 
@@ -48,3 +53,7 @@ Para rodar este projeto localmente, siga os passos abaixo:
 8. Inicie o servidor de desenvolvimento
    ```bash
     php artisan serve
+
+9. Acesse o projeto no navegador
+    ```bash
+    http://127.0.0.1:8000/ 
