@@ -1,15 +1,15 @@
 <x-guest-layout>
 
     <x-slot name="subheader">
-        Acesse sua conta e vamos explorar o RN
+        Cadastre seu negócio e alavanque seus resutados!
     </x-slot>
 
     <x-slot name="linkURL">
-        {{route('login')}}
+        {{route('dashboard')}}
     </x-slot>
 
     <x-slot name="linkText">
-        Entrar
+        Dashboard
     </x-slot>
 
     <x-slot name="header">
