@@ -15,7 +15,7 @@ Bem-vindo à Plataforma de Turismo do Rio Grande do Norte! Esta plataforma tem c
 - **🔧 Backend**: PHP, Laravel
 - **💾 Banco de Dados**: MySQL
 
-##Requisitos
+## Requisitos
 * PHP 8.2 ou superior
 * Composer
 * Node.js 20 ou superior 
