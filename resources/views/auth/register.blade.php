@@ -31,6 +31,13 @@
             <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" placeholder="Email" required autocomplete="username" />
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
+        
+        <!-- City -->
+        <div class="mt-4">
+            <x-input-label for="city" :value="__('City')" />
+            <x-text-input id="city" class="block mt-1 w-full" type="text" name="city" :value="old('city')" required autocomplete="username" />
+            <x-input-error :messages="$errors->get('city')" class="mt-2" />
+        </div>
 
         <!-- Password -->
         <div class="mt-4">
