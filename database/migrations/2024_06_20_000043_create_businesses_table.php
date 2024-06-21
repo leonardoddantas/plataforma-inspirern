@@ -13,12 +13,10 @@ return new class extends Migration
     {
         Schema::create('businesses', function (Blueprint $table) {
             $table->id();
-            $table->string('business_name'); // Nome do negócio
-            $table->string('category'); // Categoria do negócio
-            $table->char('cnpj', 14)->unique(); // CNPJ do negócio, 14 caracteres
-            $table->string('state_registration')->nullable(); // Inscrição Estadual (IE), pode ser nulo
-            $table->string('municipal_registration')->nullable(); // Inscrição Municipal (IM), pode ser nulo
-            $table->text('description')->nullable(); // Descrição do negócio, texto longo, pode ser nulo
+            $table->string('business_name');
+            $table->string('category');
+            $table->char('cnpj', 14)->unique();
+            $table->text('description')->nullable();
             $table->string('phone'); // Telefone
             $table->string('email')->unique(); // Email, deve ser único
             $table->string('website_url')->nullable(); // URL do site, pode ser nulo

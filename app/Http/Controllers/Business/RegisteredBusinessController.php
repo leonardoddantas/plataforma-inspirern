@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Business;
 
 use App\Http\Controllers\Controller;
+use App\Models\Business;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rules;
@@ -10,8 +11,10 @@ use Illuminate\View\View;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 
-class RegisteredBusinessController extends Controller {
-    public function create(): View {
+class RegisteredBusinessController extends Controller
+{
+    public function create(): View
+    {
         return view('business.register');
     }
     /**
@@ -19,17 +22,18 @@ class RegisteredBusinessController extends Controller {
      *
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function store(Request $request): RedirectResponse {
+    public function store(Request $request): RedirectResponse
+    {
         $request->validate([
-            'name' => ['required', 'string', 'max:255'],
+            'businessName' => ['required', 'string', 'max:255'],
             'category' => ['required', 'string', 'max:255'],
             'description' => ['required', 'string', 'max:255'],
             'cnpj' => ['int', 'max:255'],
             'registration' => ['string', 'max:255'],
-            'telephone' => ['required', 'int', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.Business::class],
-            'url' => ['string', 'max:255'],
-            'socialnetwork' => ['required', 'string', 'max:255'],
+            'phone' => ['required', 'int', 'max:255'],
+            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . Business::class],
+            'websiteURL' => ['string', 'max:255'],
+            'socialMedia' => ['required', 'string', 'max:255'],
             'road' => ['required', 'string', 'max:255'],
             'number' => ['required', 'int', 'max:255'],
             'neighborhood' => ['required', 'string', 'max:255'],
@@ -40,20 +44,20 @@ class RegisteredBusinessController extends Controller {
             'operatingHours' => ['required', 'int', 'max:255'],
             'ownerName' => ['required', 'string', 'max:255'],
             'ownerTelephone' => ['required', 'int', 'max:255'],
-            'ownerEmail' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
+            'ownerEmail' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
             'ownerCpf' => ['required', 'int', 'max:255'],
         ]);
 
         $business = Business::create([
-            'name' => $request->name,
+            'businessName' => $request->businessName,
             'category' => $request->category,
             'description' => $request->description,
             'cnpj' => $request->cnpj,
             'registration' => $request->registration,
-            'telephone' => $request->telephone,
+            'phone' => $request->phone,
             'email' => $request->email,
-            'url' => $request->url,
-            'socialnetwork' => $request->socialnetwork,
+            'websiteURL' => $request->websiteURL,
+            'socialMedia' => $request->socialMedia,
             'road' => $request->road,
             'number' => $request->number,
             'neighborhood' => $request->neighborhood,
@@ -70,4 +74,3 @@ class RegisteredBusinessController extends Controller {
         return redirect(route('dashboard', absolute: false));
     }
 }
-?>

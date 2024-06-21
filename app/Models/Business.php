@@ -18,8 +18,6 @@ class Business extends Model
         'business_name',
         'category',
         'cnpj',
-        'state_registration',
-        'municipal_registration',
         'description',
         'phone',
         'email',
