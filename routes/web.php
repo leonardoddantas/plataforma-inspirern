@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\Business\BusinessController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Business\RegisteredBusinessController;
+use App\Models\Business;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -17,10 +19,10 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    // Route::get('/business', [RegisteredBusinessController::class, 'create'])->name('business.create');
-    // Route::get('/confirmation', function () {
-    //     return view('business/confirmation');
-    // });
+    Route::get('/business/create', [RegisteredBusinessController::class, 'create'])->name('business.create');
+    Route::post('/business', [RegisteredBusinessController::class, 'store'])->name('business.store');
+    Route::get('/business', [BusinessController::class, 'index'])->name('business.index');
+    Route::get('/business/{id}', [BusinessController::class, 'show'])->name('business.show');
 });
 
 require __DIR__ . '/auth.php';

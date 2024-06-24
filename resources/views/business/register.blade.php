@@ -17,7 +17,7 @@
     </x-slot>
 
     <div>
-        <form method="POST" action="{{ route('register') }}" class="w-full">
+        <form method="POST" action="{{ route('business.store') }}" class="w-full" enctype="multipart/form-data">
             @csrf
 
             <div id="step-1" class="form-step w-full">
@@ -34,7 +34,7 @@
                 </div>
 
                 <div class="mb-4">
-                    <x-text-input id="cnpj" class="block mt-1 w-full bg-gray-100" type="text" name="cnpj" :value="old('cnpj')" placeholder="CNPJ" autocomplete="cnpj" />
+                    <x-text-input id="cnpj" class="block mt-1 w-full bg-gray-100" type="text" name="cnpj" :value="old('cnpj')" placeholder="CNPJ" autocomplete="cnpj" required maxlength="18"  />
                     <x-input-error :messages="$errors->get('cnpj')" class="mt-2" />
                 </div>
 
@@ -52,7 +52,7 @@
                 <div class="text-xl mb-4">Informações de Contato</div>
 
                 <div class="mb-4">
-                    <x-text-input id="phone" class="block mt-1 w-full bg-gray-100" type="text" name="phone" :value="old('phone')" placeholder="Telefone" required />
+                    <x-text-input id="phone" class="block mt-1 w-full bg-gray-100" type="text" name="phone" :value="old('phone')" placeholder="Telefone" required maxlength="20" />
                     <x-input-error :messages="$errors->get('phone')" class="mt-2" />
                 </div>
 
@@ -92,7 +92,7 @@
                     </div>
 
                     <div class="mb-4">
-                        <x-text-input id="cep" class="block mt-1 w-full bg-gray-100" type="text" name="cep" :value="old('cep')" placeholder="CEP" required />
+                        <x-text-input id="cep" class="block mt-1 w-full bg-gray-100" type="text" name="cep" :value="old('cep')" placeholder="CEP" required maxlength="9" />
                         <x-input-error :messages="$errors->get('cep')" class="mt-2" />
                     </div>
                 </div>
@@ -151,7 +151,7 @@
                 </div>
 
                 <div class="mb-4">
-                    <x-text-input id="ownerTelephone" class="block mt-1 w-full bg-gray-100" type="text" name="ownerTelephone" :value="old('ownerTelephone')" placeholder="Telefone" required />
+                    <x-text-input id="ownerTelephone" class="block mt-1 w-full bg-gray-100" type="text" name="ownerTelephone" :value="old('ownerTelephone')" placeholder="Telefone" required maxlength="20" />
                     <x-input-error :messages="$errors->get('ownerTelephone')" class="mt-2" />
                 </div>
 
@@ -161,7 +161,7 @@
                 </div>
 
                 <div class="mb-4">
-                    <x-text-input id="ownerCpf" class="block mt-1 w-full bg-gray-100" type="text" name="ownerCpf" :value="old('ownerCpf')" placeholder="CPF" required />
+                    <x-text-input id="ownerCpf" class="block mt-1 w-full bg-gray-100" type="text" name="ownerCpf" :value="old('ownerCpf')" placeholder="CPF" required maxlength="14" />
                     <x-input-error :messages="$errors->get('ownerCpf')" class="mt-2" />
                 </div>
 
@@ -188,6 +188,121 @@
             });
             document.getElementById('step-' + step).classList.remove('hidden');
         }
+    </script>
+
+    <script>
+       
+        function applyCnpjMask(input) {
+            let value = input.value.replace(/\D/g, ''); 
+            let formattedValue = '';
+
+            if (value.length > 14) {
+                value = value.slice(0, 14);
+            }
+
+            if (value.length > 0) {
+                if (value.length <= 2) {
+                    formattedValue = value.replace(/^(\d{0,2})/, '$1');
+                } else if (value.length <= 5) {
+                    formattedValue = value.replace(/^(\d{2})(\d{0,3})/, '$1.$2');
+                } else if (value.length <= 8) {
+                    formattedValue = value.replace(/^(\d{2})(\d{3})(\d{0,3})/, '$1.$2.$3');
+                } else if (value.length <= 12) {
+                    formattedValue = value.replace(/^(\d{2})(\d{3})(\d{3})(\d{0,4})/, '$1.$2.$3/$4');
+                } else if (value.length <= 14) {
+                    formattedValue = value.replace(/^(\d{2})(\d{3})(\d{3})(\d{4})(\d{0,2})/, '$1.$2.$3/$4-$5');
+                }
+            }
+
+            input.value = formattedValue;
+        }
+
+        function applyPhoneMask(input) {
+            let value = input.value.replace(/\D/g, ''); 
+            let formattedValue = '';
+
+            if (value.length > 11) {
+                value = value.slice(0, 11);
+            }
+
+            if (value.length > 0) {
+                if (value.length <= 2) {
+                    formattedValue = value.replace(/^(\d{0,2})/, '($1');
+                } else if (value.length <= 6) {
+                    formattedValue = value.replace(/^(\d{2})(\d{0,4})/, '($1) $2');
+                } else if (value.length <= 10) {
+                    formattedValue = value.replace(/^(\d{2})(\d{5})(\d{0,4})/, '($1) $2-$3');
+                } else if (value.length <= 11) {
+                    formattedValue = value.replace(/^(\d{2})(\d{5})(\d{4})/, '($1) $2-$3');
+                }
+            }
+
+            input.value = formattedValue;
+        }
+
+        function applyCpfMask(input) {
+            let value = input.value.replace(/\D/g, '');
+            let formattedValue = '';
+
+            if (value.length > 11) {
+                value = value.slice(0, 11);
+            }
+
+            if (value.length > 0) {
+                if (value.length <= 3) {
+                    formattedValue = value.replace(/^(\d{0,3})/, '$1');
+                } else if (value.length <= 6) {
+                    formattedValue = value.replace(/^(\d{3})(\d{0,3})/, '$1.$2');
+                } else if (value.length <= 9) {
+                    formattedValue = value.replace(/^(\d{3})(\d{3})(\d{0,3})/, '$1.$2.$3');
+                } else if (value.length <= 11) {
+                    formattedValue = value.replace(/^(\d{3})(\d{3})(\d{3})(\d{0,2})/, '$1.$2.$3-$4');
+                }
+            }
+
+            input.value = formattedValue;
+        }
+
+        function applyCepMask(input) {
+            let value = input.value.replace(/\D/g, ''); 
+            let formattedValue = '';
+
+            if (value.length > 8) {
+                value = value.slice(0, 8);
+            }
+
+            if (value.length > 0) {
+                if (value.length <= 5) {
+                    formattedValue = value.replace(/^(\d{0,5})/, '$1');
+                } else if (value.length <= 8) {
+                    formattedValue = value.replace(/^(\d{5})(\d{0,3})/, '$1-$2');
+                }
+            }
+
+            input.value = formattedValue;
+        }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            document.getElementById('cnpj').addEventListener('input', function() {
+                applyCnpjMask(this);
+            });
+
+            document.getElementById('phone').addEventListener('input', function() {
+                applyPhoneMask(this);
+            });
+
+            document.getElementById('ownerTelephone').addEventListener('input', function() {
+                applyPhoneMask(this);
+            });
+
+            document.getElementById('cep').addEventListener('input', function() {
+                applyCepMask(this);
+            });
+
+            document.getElementById('ownerCpf').addEventListener('input', function() {
+                applyCpfMask(this);
+            });
+        });
     </script>
 
 </x-guest-layout>
