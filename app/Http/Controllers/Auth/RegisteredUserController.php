@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
+use App\Models\City;
 
 class RegisteredUserController extends Controller
 {
@@ -19,7 +20,13 @@ class RegisteredUserController extends Controller
      */
     public function create(): View
     {
-        return view('auth.register');
+        /**
+         * recover database.
+         */
+        $cities=City::orderBy('name', 'asc')->get();
+        return view('auth.register', [
+            'cities' => $cities
+        ]);
     }
 
     /**
