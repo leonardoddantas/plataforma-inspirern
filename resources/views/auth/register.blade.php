@@ -31,6 +31,20 @@
             <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" placeholder="Email" required autocomplete="username" />
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
+        
+        <!-- City -->
+        <div class="mt-4">
+            <x-input-label for="cities" :value="__('')" />
+            <select name="cities" id="cities">
+                <option value=" ">Selecione sua cidade</option>
+                @forelse ($cities as $city)
+                    <option value="{{$city ->name}}" {{ old("cities") == $city->name ? 'selected': ''}} >{{$city ->name}}</option>
+                @empty
+                    <option value="">Nenhuma cidade selecionada</option>
+                @endforelse
+            </select>
+            <x-input-error :messages="$errors->get('city')" class="mt-2" />
+        </div>
 
         <!-- Password -->
         <div class="mt-4">
