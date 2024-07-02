@@ -19,6 +19,8 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
+    Route::get('/business/create', [RegisteredBusinessController::class, 'create'])->name('business.create');
+    Route::post('/business', [RegisteredBusinessController::class, 'store'])->name('business.store');
     Route::get('/business', [BusinessController::class, 'index'])->name('business.index');
     Route::get('/business/{id}', [BusinessController::class, 'show'])->name('business.show');
 });
