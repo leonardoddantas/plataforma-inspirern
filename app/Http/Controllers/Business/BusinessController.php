@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Business;
 
 use App\Http\Controllers\Controller;
 use App\Models\Business;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 use Illuminate\View\View;
 
 class BusinessController extends Controller
@@ -54,5 +54,15 @@ class BusinessController extends Controller
     {
         $business = Business::find($id);
         return view('business.show', compact('business'));
+    }
+
+    public function avaliation(Request $request)
+    {
+        $business = Business::find($request->id);
+        $business->update([
+            'status' => $request->status,
+            'ratingBusiness' => $request->ratingBusiness,
+        ]);
+        return back()->with('sucess', 'Ação executada com sucesso!');
     }
 }

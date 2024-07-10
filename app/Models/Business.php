@@ -36,5 +36,6 @@ class Business extends Model
         'ownerTelephone',
         'ownerEmail',
         'ownerCpf',
+        'ratingBusiness',
     ];
 }

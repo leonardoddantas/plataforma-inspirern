@@ -23,6 +23,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/business', [RegisteredBusinessController::class, 'store'])->name('business.store');
     Route::get('/business', [BusinessController::class, 'index'])->name('business.index');
     Route::get('/business/{id}', [BusinessController::class, 'show'])->name('business.show');
+    Route::post('/business/avaliation', [BusinessController::class, 'avaliation'])->name('business.avaliation');
 });
 
 require __DIR__ . '/auth.php';
