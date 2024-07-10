@@ -35,6 +35,7 @@ return new class extends Migration
             $table->string('ownerEmail')->unique();
             $table->char('ownerCpf', 11)->unique();
             $table->string('status')->default('pendente');
+            $table->text('ratingBusiness')->nullable();;
             $table->timestamp('registrationDate')->useCurrent();
             $table->timestamps();
         });
