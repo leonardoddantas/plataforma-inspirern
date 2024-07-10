@@ -34,7 +34,7 @@
         
         <!-- City -->
         <div class="mt-4">
-            <select name="cities" id="cities" class="block mt-1 w-full p-3 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
+            <select name="city" id="city" class="block mt-1 w-full p-3 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
                 <option value=" ">Selecione sua cidade</option>
                 @forelse ($cities as $city)
                     <option value="{{$city->name}}" {{ old("cities") == $city->name ? 'selected': ''}} >{{$city->name}}</option>

@@ -39,7 +39,7 @@
                 </div>
 
                 <div class="mb-4">
-                    <textarea id="description" name="description" rows="5" class="block w-full mt-1 bg-gray-100 border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" placeholder="Digite uma descrição..." required></textarea>
+                    <textarea id="description" name="description" rows="5" value="old('description')" class="block w-full mt-1 bg-gray-100 border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" placeholder="Digite uma descrição..." required></textarea>
                     <x-input-error :messages="$errors->get('description')" class="mt-2" />
                 </div>
 
@@ -67,7 +67,7 @@
                 </div>
 
                 <div class="mb-4">
-                    <textarea id="socialMedia" name="socialMedia" rows="5" class="block w-full mt-1 bg-gray-100 border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" placeholder="@ das redes sociais..."></textarea>
+                    <textarea id="socialMedia" name="socialMedia" rows="5" value="old('socialMedia')" class="block w-full mt-1 bg-gray-100 border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" placeholder="@ das redes sociais..."></textarea>
                     <x-input-error :messages="$errors->get('socialMedia')" class="mt-2" />
                 </div>
 

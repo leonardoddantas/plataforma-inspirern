@@ -6,6 +6,7 @@
                 <h2 class="text-2xl font-bold mb-4">{{ $business->businessName }}</h2>
                 <p><strong>Categoria:</strong> {{ $business->category }}</p>
                 <p><strong>Descrição:</strong> {{ $business->description }}</p>
+                <p><strong>CNPJ:</strong> {{ $business->cnpj }}</p>
                 <p><strong>Telefone:</strong> {{ $business->phone }}</p>
                 <p><strong>Email:</strong> {{ $business->email }}</p>
                 <p><strong>Website:</strong> {{ $business->websiteURL ?: 'Não especificado' }}</p>
