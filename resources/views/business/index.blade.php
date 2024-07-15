@@ -6,7 +6,8 @@
                     <select name="status" id="status" class="mr-4 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
                         <option value="">Status</option>
                         <option value="pendente">Pendente</option>
-                        <option value="resolvido">Resolvido</option>
+                        <option value="aprovado">Aprovado</option>
+                        <option value="reprovado">Reprovado</option>
                     </select>
                     <input type="date" id="date" name="date" class="block border-gray-300 text-lg focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm mr-2">
                     <input type="text" id="search" name="search" class="block border-gray-300 text-lg focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm mr-2" placeholder="Pesquisar">
@@ -20,8 +21,9 @@
                         <thead class="bg-gray-300">
                             <tr>
                                 <th class="py-2 px-4 border-b border-gray-200">Nome</th>
+                                <th class="py-2 px-4 border-b border-gray-200">CNPJ</th>
                                 <th class="py-2 px-4 border-b border-gray-200">Categoria</th>
-                                <th class="py-2 px-4 border-b border-gray-200">Data</th>
+                                <th class="py-2 px-4 border-b border-gray-200">Data de Cadastro</th>
                                 <th class="py-2 px-4 border-b border-gray-200">Status</th>
                                 <th class="py-2 px-4 border-b border-gray-200">Link</th>
                             </tr>
@@ -30,9 +32,31 @@
                             @forelse($businesses as $business)
                             <tr class="bg-gray-50">
                                 <td class="py-2 px-4 border-b border-gray-200">{{ $business->businessName }}</td>
+                                <td class="py-2 px-4 border-b border-gray-200">{{ $business->cnpj }}</td>
                                 <td class="py-2 px-4 border-b border-gray-200">{{ $business->category }}</td>
                                 <td class="py-2 px-4 border-b border-gray-200">{{ $business->registrationDate->format('d/m/Y') }}</td>
-                                <td class="py-2 px-4 border-b border-gray-200">{{ $business->status }}</td>
+                               <td class="py-2 px-4 border-b border-gray-200">
+                                    @php
+                                        $statusClass = '';
+                                        switch ($business->status) {
+                                            case 'pendente':
+                                                $statusClass = 'text-yellow-600';
+                                                break;
+                                            case 'aprovado':
+                                                $statusClass = 'text-green-600';
+                                                break;
+                                            case 'reprovado':
+                                                $statusClass = 'text-red-600';
+                                                break;
+                                            default:
+                                                $statusClass = 'bg-gray-200 text-gray-800';
+                                                break;
+                                        }
+                                    @endphp
+
+                                    <span class="px-2 py-1 rounded {{ $statusClass }}">{{ $business->status }}</span>
+                                </td>
+
                                 <td class="py-2 px-4 border-b border-gray-200">
                                     <a href="{{ route('business.show', $business->id) }}" class="text-blue-500 hover:text-blue-700">Detalhes</a>
                                 </td>

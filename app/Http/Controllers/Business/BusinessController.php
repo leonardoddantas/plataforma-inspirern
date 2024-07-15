@@ -40,7 +40,7 @@ class BusinessController extends Controller
             $query->whereDate('registrationDate', $date);
         }
 
-        $businesses = $query->select('id', 'businessName', 'category', 'status', 'registrationDate')->get();
+        $businesses = $query->select('id', 'businessName', 'cnpj', 'category', 'status', 'registrationDate')->get();
 
         $businesses->transform(function ($business) {
             $business->registrationDate = Carbon::parse($business->registrationDate);
@@ -58,11 +58,21 @@ class BusinessController extends Controller
 
     public function avaliation(Request $request)
     {
+        $request->validate(
+            [
+                'id' => 'required|exists:businesses,id',
+                'status' => 'required|string',
+                'ratingBusiness' => 'required_if:status,reprovado|nullable|string',
+            ],
+        );
+
         $business = Business::find($request->id);
+
         $business->update([
             'status' => $request->status,
             'ratingBusiness' => $request->ratingBusiness,
         ]);
-        return back()->with('sucess', 'Ação executada com sucesso!');
+
+        return back();
     }
 }
