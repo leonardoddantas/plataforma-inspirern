@@ -8,7 +8,7 @@
 
     <div class="py-1">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-            <div class="mt-6 space-y-6 p-4 sm:p-8 bg-white shadow sm:rounded-lg">
+            <form class="mt-6 space-y-6 p-4 sm:p-8 bg-white shadow sm:rounded-lg">
                 <div>
                     <h2 class="text-lg font-medium text-gray-900">
                         {{ __('Informações básicas') }}
@@ -36,7 +36,7 @@
                     <x-input-label for="descricao" :value="__('Descrição')" />
                       <textarea id="descricao" name="descricao" rows="5" class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" disabled>{{ $business->description }}</textarea>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
 
@@ -74,7 +74,7 @@
                         <a href="{{ $socialMedia->socialMediaURL }}" target="_blank">
 
                             @if ($socialMedia->socialMediaName == 'Facebook')
-                                
+
                                 <svg class="w-8 h-8" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M512 256C512 114.6 397.4 0 256 0S0 114.6 0 256C0 376 82.7 476.8 194.2 504.5V334.2H141.4V256h52.8V222.3c0-87.1 39.4-127.5 125-127.5c16.2 0 44.2 3.2 55.7 6.4V172c-6-.6-16.5-1-29.6-1c-42 0-58.2 15.9-58.2 57.2V256h83.6l-14.4 78.2H287V510.1C413.8 494.8 512 386.9 512 256h0z"/></svg>
 
                             @elseif ($socialMedia->socialMediaName == 'Instagram')
@@ -140,7 +140,7 @@
         </div>
     </div>
 
-   <div class="py-1">
+    <div class="py-1">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
             <div class="mt-6 space-y-6 p-4 sm:p-8 bg-white shadow sm:rounded-lg">
                 <div>
@@ -150,16 +150,16 @@
                 </div>
                     
                 <div>
-                    <x-input-label for="diasF" :value="__('Dias de Funcionamento')" />
-                    @php
+                    <x-input-label for="diasF" :value="__('Dias de Funionamento')" />
+                      @php
                         $operatingSchedule = json_decode($business->operatingSchedule, true);
                     @endphp
 
                     <ul class="mt-2 flex flex-row justify-between">
-                        @foreach($operatingSchedule as $schedule)
+                        @foreach($operatingSchedule as $day => $hours)
                             <li class="flex flex-col justify-center items-center">
-                                <span>{{ ucfirst($schedule['day']) }}</span>
-                                <span>{{ $schedule['opening_time'] }} - {{ $schedule['closing_time'] }}</span>
+                                <span>{{ ucfirst($day) }}</span>
+                                <span>{{ $hours }}</span>
                             </li>
                         @endforeach
                     </ul>
@@ -172,7 +172,6 @@
             </div>
         </div>
     </div>
-
 
     <div class="py-1">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">

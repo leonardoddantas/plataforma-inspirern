@@ -20,6 +20,7 @@
         <form method="POST" action="{{ route('business.store') }}" class="w-full" enctype="multipart/form-data">
             @csrf
 
+            {{-- basic information --}}
             <div id="step-1" class="form-step w-full">
                 <div class="text-xl mb-4">Informações básicas</div>
 
@@ -48,6 +49,7 @@
                 </div>
             </div>
 
+             {{-- contact information --}}
             <div id="step-2" class="form-step w-full hidden">
                 <div class="text-xl mb-4">Informações de Contato</div>
 
@@ -66,18 +68,45 @@
                     <x-input-error :messages="$errors->get('websiteURL')" class="mt-2" />
                 </div>
 
-                <div class="mb-4">
-                    <textarea id="socialMedia" name="socialMedia" rows="5" value="old('socialMedia')" class="block w-full mt-1 bg-gray-100 border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" placeholder="@ das redes sociais..."></textarea>
-                    <x-input-error :messages="$errors->get('socialMedia')" class="mt-2" />
-                </div>
-
                 <div class="flex justify-between">
                     <x-primary-button type="button" onclick="previousStep(1)">Voltar</x-primary-button>
                     <x-primary-button type="button" onclick="nextStep(3)">Próximo</x-primary-button>
                 </div>
             </div>
 
-            <div id="step-3" class="form-step w-full hidden">
+            {{-- social media --}}
+             <div id="step-3" class="form-step w-full hidden max-h-96 overflow-y-auto">
+                <div class="text-xl mb-4">Redes Sociais</div>
+
+                <div class="mb-4">
+                    <x-text-input id="facebook" class="block mt-1 w-full bg-gray-100" type="text" name="facebook" :value="old('facebook')" placeholder="Link do Facebook" />
+                    <x-input-error :messages="$errors->get('facebook')" class="mt-2" />
+                </div>
+
+                <div class="mb-4">
+                    <x-text-input id="instagram" class="block mt-1 w-full bg-gray-100" type="text" name="instagram" :value="old('instagram')" placeholder="Link do Instagram" />
+                    <x-input-error :messages="$errors->get('instagram')" class="mt-2" />
+                </div>
+
+                <div class="mb-4">
+                    <x-text-input id="whatsapp" class="block mt-1 w-full bg-gray-100" type="text" name="whatsapp" :value="old('whatsapp')" placeholder="Link do WhatsApp" />
+                    <x-input-error :messages="$errors->get('whatsapp')" class="mt-2" />
+                </div>
+
+                <div id="additionalSocialMediaContainer"></div>
+
+                <div class="mb-4">
+                    <button type="button" onclick="addSocialMediaField()" class="w-full bg-gray-700 text-white px-4 py-2 rounded">Adicionar Outra Rede Social</button>
+                </div>
+
+                <div class="flex justify-between">
+                    <x-primary-button type="button" onclick="previousStep(2)">Voltar</x-primary-button>
+                    <x-primary-button type="button" onclick="nextStep(4)">Próximo</x-primary-button>
+                </div>
+            </div>
+
+            {{-- location --}}
+            <div id="step-4" class="form-step w-full hidden">
                 <div class="text-xl mb-4">Localização</div>
 
                 <div class="mb-4">
@@ -113,22 +142,36 @@
                 </div>
 
                 <div class="flex justify-between">
-                    <x-primary-button type="button" onclick="previousStep(2)">Voltar</x-primary-button>
-                    <x-primary-button type="button" onclick="nextStep(4)">Próximo</x-primary-button>
+                    <x-primary-button type="button" onclick="previousStep(3)">Voltar</x-primary-button>
+                    <x-primary-button type="button" onclick="nextStep(5)">Próximo</x-primary-button>
                 </div>
             </div>
 
-            <div id="step-4" class="form-step w-full hidden">
+            {{-- additional details --}}
+            <div id="step-5" class="form-step w-full hidden">
                 <div class="text-xl mb-4">Detalhes Adicionais</div>
 
-                <div class="mb-4">
-                    <x-text-input id="operatingDays" class="block mt-1 w-full bg-gray-100" type="text" name="operatingDays" :value="old('operatingDays')" placeholder="Dias de funcionamento" required />
+               <div class="mb-4">
+                    <div class="text-base mb-4">Dias e Horários de Funcionamento</div>
+                    @foreach(['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado', 'Domingo'] as $day)
+                        <div class="mb-2">
+                            <label class="inline-flex items-center">
+                                <input type="checkbox" name="operatingDays[]" value="{{ $day }}" class="form-checkbox h-5 w-5 text-gray-700" id="checkbox-{{ strtolower($day) }}" onchange="toggleTimeInputs('{{ strtolower($day) }}')">
+                                <span class="ml-2">{{ $day }}</span>
+                            </label>
+                            <div class="grid grid-cols-2 gap-4 mt-2 hidden time-inputs" id="time-inputs-{{ strtolower($day) }}">
+                                <div>
+                                    <label for="openingTime-{{ strtolower($day) }}" class="block text-sm font-medium text-gray-700">Abertura</label>
+                                    <input id="openingTime-{{ strtolower($day) }}" class="block mt-1 w-full bg-gray-100 p-3 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm" type="time" name="openingTime[{{ strtolower($day) }}]" />
+                                </div>
+                                <div>
+                                    <label for="closingTime-{{ strtolower($day) }}" class="block text-sm font-medium text-gray-700">Fechamento</label>
+                                    <input id="closingTime-{{ strtolower($day) }}" class="block mt-1 w-full bg-gray-100 p-3 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm" type="time" name="closingTime[{{ strtolower($day) }}]" />
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
                     <x-input-error :messages="$errors->get('operatingDays')" class="mt-2" />
-                </div>
-
-                <div class="mb-4">
-                    <x-text-input id="operatingHours" class="block mt-1 w-full bg-gray-100" type="text" name="operatingHours" :value="old('operatingHours')" placeholder="Horário de funcionamento" required />
-                    <x-input-error :messages="$errors->get('operatingHours')" class="mt-2" />
                 </div>
 
                 <div class="mb-4">
@@ -137,12 +180,13 @@
                 </div>
 
                 <div class="flex justify-between">
-                    <x-primary-button type="button" onclick="previousStep(3)">Voltar</x-primary-button>
-                    <x-primary-button type="button" onclick="nextStep(5)">Próximo</x-primary-button>
+                    <x-primary-button type="button" onclick="previousStep(4)">Voltar</x-primary-button>
+                    <x-primary-button type="button" onclick="nextStep(6)">Próximo</x-primary-button>
                 </div>
             </div>
 
-            <div id="step-5" class="form-step w-full hidden">
+            {{-- owner information --}}
+            <div id="step-6" class="form-step w-full hidden">
                 <div class="text-xl mb-4">Informações do Proprietário</div>
 
                 <div class="mb-4">
@@ -166,7 +210,7 @@
                 </div>
 
                 <div class="flex justify-between">
-                    <x-primary-button type="button" onclick="previousStep(4)">Voltar</x-primary-button>
+                    <x-primary-button type="button" onclick="previousStep(5)">Voltar</x-primary-button>
                     <x-primary-button type="submit">Enviar</x-primary-button>
                 </div>
             </div>
@@ -188,6 +232,29 @@
             });
             document.getElementById('step-' + step).classList.remove('hidden');
         }
+
+         function addSocialMediaField() {
+            var container = document.getElementById('additionalSocialMediaContainer');
+            var newField = document.createElement('div');
+            newField.className = 'mb-4';
+
+            var inputName = document.createElement('input');
+            inputName.className = 'block mt-1 w-full bg-gray-100 p-3 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm';
+            inputName.type = 'text';
+            inputName.name = 'socialMediaNames[]';
+            inputName.placeholder = 'Nome da Rede Social';
+            newField.appendChild(inputName);
+
+            var inputURL = document.createElement('input');
+            inputURL.className = 'block mt-1 w-full bg-gray-100 p-3 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm mt-4';
+            inputURL.type = 'text';
+            inputURL.name = 'socialMediaURLs[]';
+            inputURL.placeholder = 'URL do Perfil';
+            newField.appendChild(inputURL);
+
+            container.appendChild(newField);
+        }
+
     </script>
 
     <script>
@@ -239,6 +306,20 @@
 
             input.value = formattedValue;
         }
+
+        function toggleTimeInputs(day) {
+        var allTimeInputs = document.querySelectorAll('.time-inputs');
+        var checkBox = document.getElementById('checkbox-' + day);
+        var timeInputs = document.getElementById('time-inputs-' + day);
+        
+        allTimeInputs.forEach(function(input) {
+            input.classList.add('hidden');
+        });
+        
+        if (checkBox.checked) {
+            timeInputs.classList.remove('hidden');
+        }
+    }
 
         function applyCpfMask(input) {
             let value = input.value.replace(/\D/g, '');

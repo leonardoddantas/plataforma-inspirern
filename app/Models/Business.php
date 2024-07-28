@@ -9,11 +9,6 @@ class Business extends Model
 {
     use HasFactory;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
     protected $fillable = [
         'businessName',
         'category',
@@ -22,15 +17,13 @@ class Business extends Model
         'phone',
         'email',
         'websiteURL',
-        'socialMedia',
         'road',
         'number',
         'cep',
         'neighborhood',
         'city',
         'state',
-        'operatingDays',
-        'operatingHours',
+        'operatingSchedule',
         'locationPhoto',
         'ownerName',
         'ownerTelephone',
@@ -38,5 +31,11 @@ class Business extends Model
         'ownerCpf',
         'status',
         'ratingBusiness',
+        'registrationDate',
     ];
+
+    public function socialMedias()
+    {
+        return $this->hasMany(SocialMedia::class);
+    }
 }

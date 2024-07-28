@@ -20,15 +20,13 @@ return new class extends Migration
             $table->string('phone');
             $table->string('email')->unique();
             $table->string('websiteURL')->nullable();
-            $table->json('socialMedia')->nullable();
             $table->string('road');
             $table->string('number');
             $table->char('cep', 9);
             $table->string('neighborhood');
             $table->string('city');
             $table->string('state');
-            $table->json('operatingDays');
-            $table->json('operatingHours');
+            $table->json('operatingSchedule');
             $table->string('locationPhoto');
             $table->string('ownerName');
             $table->string('ownerTelephone');

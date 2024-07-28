@@ -52,9 +52,10 @@ class BusinessController extends Controller
 
     public function show($id): View
     {
-        $business = Business::find($id);
+        $business = Business::with('socialMedias')->find($id);
         return view('business.show', compact('business'));
     }
+
 
     public function avaliation(Request $request)
     {

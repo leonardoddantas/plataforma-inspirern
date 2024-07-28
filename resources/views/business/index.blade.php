@@ -16,7 +16,7 @@
                     </x-primary-button>
                 </div>
 
-                <div class="w-full overflow-x-auto flex justify-center items-center mt-3">
+                <div class="w-full overflow-x-auto flex justify-center items-center mt-3 mb-20">
                     <table class="w-full bg-white border text-center shadow-md">
                         <thead class="bg-gray-300">
                             <tr>
