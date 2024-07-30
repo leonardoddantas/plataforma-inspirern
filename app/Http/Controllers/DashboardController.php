@@ -17,6 +17,6 @@ class DashboardController extends Controller
             'pendente' => Business::where('status', 'pendente')->count(),
         ];
 
-        return view('dashboard', compact('businessesStatus'));
+        return view('admin.dashboard', compact('businessesStatus'));
     }
 }
