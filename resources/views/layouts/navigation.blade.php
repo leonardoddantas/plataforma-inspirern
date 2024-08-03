@@ -16,6 +16,23 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
                 </div>
+
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('business.index')">
+                        {{ __('Negocios Cadastrados') }}
+                    </x-nav-link>
+                </div>
+
+                @auth
+                    @if(auth()->user()->type !== 'admin')
+                        <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                            <x-nav-link :href="route('business.create')">
+                                {{ __('Cadastrar Negocio') }}
+                            </x-nav-link>
+                        </div>
+                    @endif
+                @endauth
+
             </div>
 
             <!-- Settings Dropdown -->
