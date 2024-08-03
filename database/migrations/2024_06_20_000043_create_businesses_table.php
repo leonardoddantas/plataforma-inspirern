@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('businessName');
             $table->string('category');
-            $table->char('cnpj', 14)->unique();
+            $table->char('cnpj', 18)->unique();
             $table->text('description');
             $table->string('phone');
             $table->string('email')->unique();
@@ -31,11 +31,14 @@ return new class extends Migration
             $table->string('ownerName');
             $table->string('ownerTelephone');
             $table->string('ownerEmail')->unique();
-            $table->char('ownerCpf', 11)->unique();
+            $table->char('ownerCpf', 14)->unique();
             $table->string('status')->default('pendente');
             $table->text('ratingBusiness')->nullable();
             $table->timestamp('registrationDate')->useCurrent();
             $table->timestamps();
+
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

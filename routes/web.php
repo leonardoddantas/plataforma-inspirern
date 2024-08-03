@@ -30,14 +30,15 @@ Route::middleware('auth')->group(function () {
     // Business
     Route::get('/business/create', [RegisteredBusinessController::class, 'create'])->name('business.create');
     Route::post('/business', [RegisteredBusinessController::class, 'store'])->name('business.store');
+    // Business
+    Route::get('/business', [BusinessController::class, 'index'])->name('business.index');
+    Route::get('/business/{id}', [BusinessController::class, 'show'])->name('business.show');
+    Route::get('/business/edit/{id}', [BusinessController::class, 'edit'])->name('business.edit');
+    Route::put('/business/update/{id}', [BusinessController::class, 'update'])->name('business.update');
+    Route::post('/business/avaliation', [BusinessController::class, 'avaliation'])->name('business.avaliation');
 
     // middleware AdminAcess
     Route::middleware('admin')->group(function () {
-
-        // Business
-        Route::get('/business', [BusinessController::class, 'index'])->name('business.index');
-        Route::get('/business/{id}', [BusinessController::class, 'show'])->name('business.show');
-        Route::post('/business/avaliation', [BusinessController::class, 'avaliation'])->name('business.avaliation');
     });
 });
 

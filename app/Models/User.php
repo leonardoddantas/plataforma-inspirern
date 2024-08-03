@@ -24,6 +24,14 @@ class User extends Authenticatable
     ];
 
     /**
+     * Get the businesses for the user.
+     */
+    public function businesses()
+    {
+        return $this->hasMany(Business::class);
+    }
+
+    /**
      * The attributes that should be hidden for serialization.
      *
      * @var array<int, string>

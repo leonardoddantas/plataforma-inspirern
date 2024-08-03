@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Business;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 
 class BusinessController extends Controller
@@ -17,6 +19,10 @@ class BusinessController extends Controller
         $date = $request->input('date');
 
         $query = Business::query();
+
+        if (Auth::user()->type !== 'admin') {
+            $query->where('user_id', Auth::id());
+        }
 
         if (!empty($search)) {
 
@@ -54,6 +60,41 @@ class BusinessController extends Controller
     {
         $business = Business::with('socialMedias')->find($id);
         return view('business.show', compact('business'));
+    }
+
+    public function edit($id): View
+    {
+        $business = Business::with('socialMedias')->find($id);
+        return view('business.edit', compact('business'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $business = Business::findOrFail($id);
+
+        if ($request->hasFile('locationPhoto')) {
+
+            Storage::delete('public/business/' . $business->locationPhoto);
+            $business->locationPhoto = $request->file('locationPhoto')->store('business', 'public');
+        }
+
+        if ($request->has('operatingSchedule')) {
+            $formattedSchedule = [];
+
+            foreach ($request->input('operatingSchedule') as $day => $times) {
+                $formattedSchedule[] = [
+                    'day' => ucfirst($day),
+                    'opening_time' => $times['opening_time'],
+                    'closing_time' => $times['closing_time'],
+                ];
+            }
+
+            $business->operatingSchedule = json_encode($formattedSchedule);
+        }
+
+        $business->update($request->except('locationPhoto', 'operatingSchedule'));
+
+        return back();
     }
 
 

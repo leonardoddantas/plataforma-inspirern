@@ -2,19 +2,24 @@
     <x-slot name="slot">
         <div class="w-full flex justify-center items-center">
             <div class="w-4/5 flex flex-col">
-                <div class="w-full flex justify-end mt-10">
-                    <select name="status" id="status" class="mr-4 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
-                        <option value="">Status</option>
-                        <option value="pendente">Pendente</option>
-                        <option value="aprovado">Aprovado</option>
-                        <option value="reprovado">Reprovado</option>
-                    </select>
-                    <input type="date" id="date" name="date" class="block border-gray-300 text-lg focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm mr-2">
-                    <input type="text" id="search" name="search" class="block border-gray-300 text-lg focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm mr-2" placeholder="Pesquisar">
-                    <x-primary-button class="w-1/6" id="searchButton">
-                        {{ __('Pesquisar') }}
-                    </x-primary-button>
-                </div>
+
+                 @auth
+                    @if(auth()->user()->type === 'admin')
+                        <div class="w-full flex justify-end mt-10">
+                            <select name="status" id="status" class="mr-4 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
+                                <option value="">Status</option>
+                                <option value="pendente">Pendente</option>
+                                <option value="aprovado">Aprovado</option>
+                                <option value="reprovado">Reprovado</option>
+                            </select>
+                            <input type="date" id="date" name="date" class="block border-gray-300 text-lg focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm mr-2">
+                            <input type="text" id="search" name="search" class="block border-gray-300 text-lg focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm mr-2" placeholder="Pesquisar">
+                            <x-primary-button class="w-1/6" id="searchButton">
+                                {{ __('Pesquisar') }}
+                            </x-primary-button>
+                        </div>
+                    @endif
+                @endauth
 
                 <div class="w-full overflow-x-auto flex justify-center items-center mt-3 mb-20">
                     <table class="w-full bg-white border text-center shadow-md">
@@ -58,7 +63,16 @@
                                 </td>
 
                                 <td class="py-2 px-4 border-b border-gray-200">
-                                    <a href="{{ route('business.show', $business->id) }}" class="text-blue-500 hover:text-blue-700">Detalhes</a>
+
+                                     @auth
+                                        @if(auth()->user()->type === 'admin')
+                                            <a href="{{ route('business.show', $business->id) }}" class="text-blue-500 hover:text-blue-700">Detalhes</a>
+                                        @endif
+                                        
+                                        @if(auth()->user()->type !== 'admin')
+                                            <a href="{{ route('business.edit', $business->id) }}" class="text-blue-500 hover:text-blue-700">Editar</a>
+                                        @endif
+                                    @endauth
                                 </td>
                             </tr>
                             @empty
