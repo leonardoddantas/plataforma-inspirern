@@ -71,42 +71,59 @@
                     
                     <div class="flex flex-wrap justify-between">
 
-                     <div class="w-1/2 p-2">
-                        <x-input-label for="websiteURL" :value="__('URL do site')" />
-                        <x-text-input id="websiteURL" name="websiteURL" type="text" class="mt-1 block w-full" value="{{ $business->websiteURL }}"/>
-                        <x-input-error class="mt-2" :messages="$errors->get('websiteURL')" />
-                    </div>
+                        <div class="w-1/2 p-2">
+                            <x-input-label for="websiteURL" :value="__('URL do site')" />
+                            <x-text-input id="websiteURL" name="websiteURL" type="text" class="mt-1 block w-full" value="{{ $business->websiteURL }}"/>
+                            <x-input-error class="mt-2" :messages="$errors->get('websiteURL')" />
+                        </div>
 
-                    @foreach ($business->socialMedias as $socialMedia)
+                        @foreach ($business->socialMedias as $socialMedia)
 
-                            @if ($socialMedia->socialMediaName == 'Facebook')
+                            @php
+                                $socialMediaName = $socialMedia->socialMediaName;
+                                $socialMediaURL = $socialMedia->socialMediaURL;
+                                $fieldId = Str::slug($socialMediaName);
+                            @endphp
 
+                            @if ($socialMediaName == 'Facebook')
                                 <div class="w-1/2 p-2">
                                     <x-input-label for="facebook" :value="__('Facebook')" />
-                                    <x-text-input id="facebook" name="facebook" type="text" class="mt-1 block w-full" value="{{ $socialMedia->socialMediaURL }}"/>
+                                    <x-text-input id="facebook" name="facebook" type="text" class="mt-1 block w-full" value="{{ $socialMediaURL }}"/>
                                     <x-input-error class="mt-2" :messages="$errors->get('facebook')" />
                                 </div>
-
-                            @elseif ($socialMedia->socialMediaName == 'Instagram')
-
+                            @elseif ($socialMediaName == 'Instagram')
                                 <div class="w-1/2 p-2">
                                     <x-input-label for="instagram" :value="__('Instagram')" />
-                                    <x-text-input id="instagram" name="instagram" type="text" class="mt-1 block w-full" value="{{ $socialMedia->socialMediaURL }}"/>
+                                    <x-text-input id="instagram" name="instagram" type="text" class="mt-1 block w-full" value="{{ $socialMediaURL }}"/>
                                     <x-input-error class="mt-2" :messages="$errors->get('instagram')" />
                                 </div>
-
-                            @elseif ($socialMedia->socialMediaName == 'WhatsApp')
-
+                            @elseif ($socialMediaName == 'WhatsApp')
                                 <div class="w-1/2 p-2">
                                     <x-input-label for="whatsApp" :value="__('WhatsApp')" />
-                                    <x-text-input id="whatsApp" name="whatsApp" type="text" class="mt-1 block w-full" value="{{ $socialMedia->socialMediaURL }}"/>
+                                    <x-text-input id="whatsApp" name="whatsApp" type="text" class="mt-1 block w-full" value="{{ $socialMediaURL }}"/>
                                     <x-input-error class="mt-2" :messages="$errors->get('whatsApp')" />
                                 </div>
-
+                            @else
+                                <div class="w-1/2 p-2">
+                                    <x-input-label for="{{ $fieldId }}" :value="__($socialMediaName)" />
+                                    <x-text-input id="{{ $fieldId }}" name="{{ $fieldId }}" type="text" class="mt-1 block w-full" value="{{ $socialMediaURL }}"/>
+                                    <x-input-error class="mt-2" :messages="$errors->get($fieldId)" />
+                                </div>
                             @endif
-                        </a>
+
                     @endforeach
+
                     </div>
+
+                    <div id="divAddSocialMedia" class="flex-wrap hidden">
+                       
+                    </div>
+
+                    <div class="flex justify-start p-2">
+                        <x-primary-button id="buttonAddSocialMidia" type="button">Adicionar rede social</x-primary-button>
+                    </div>
+
+                    <button type="button" onclick="gatherNewSocialMedias()">toque</button>
         
                     <div>
                         <h2 class="text-lg font-medium text-gray-900">
@@ -227,5 +244,32 @@
             </div>
         </div>
     </form>
+
+    <script>
+        let buttonAddSocialMidia = document.querySelector('#buttonAddSocialMidia');
+        let divAddSocialMedia = document.querySelector('#divAddSocialMedia');
+        let socialMediaIndex = 0;
+
+        buttonAddSocialMidia.addEventListener('click', () => {
+            divAddSocialMedia.classList.replace('hidden', 'flex');
+
+            const newCamp = `
+                <div class="w-1/2 p-2">
+                    <x-input-label for="socialMediaName_${socialMediaIndex}" :value="__('Nome da rede social')" />
+                    <x-text-input id="socialMediaName_${socialMediaIndex}" name="socialMediaNames[]" type="text" class="mt-1 block w-full"/>
+                    <x-input-error class="mt-2" :messages="$errors->get('socialMediaNames[]')" />
+                </div>
+                <div class="w-1/2 p-2">
+                    <x-input-label for="socialMediaURL_${socialMediaIndex}" :value="__('Link da rede social')" />
+                    <x-text-input id="socialMediaURL_${socialMediaIndex}" name="socialMediaURLs[]" type="text" class="mt-1 block w-full"/>
+                    <x-input-error class="mt-2" :messages="$errors->get('socialMediaURLs[]')" />
+                </div>
+            `;
+
+            divAddSocialMedia.insertAdjacentHTML('beforeend', newCamp);
+            socialMediaIndex++;
+        });
+
+    </script>
 
 </x-app-layout>
