@@ -94,6 +94,18 @@ class BusinessController extends Controller
 
         $business->update($request->except('locationPhoto', 'operatingSchedule'));
 
+        $socialMediaNames = $request->input('socialMediaNames', []);
+        $socialMediaURLs = $request->input('socialMediaURLs', []);
+
+        foreach ($socialMediaNames as $index => $name) {
+            if (!empty($name) && !empty($socialMediaURLs[$index])) {
+                $business->socialMedias()->create([
+                    'socialMediaName' => $name,
+                    'socialMediaURL' => $socialMediaURLs[$index],
+                ]);
+            }
+        }
+
         return back();
     }
 
