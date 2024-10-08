@@ -4,11 +4,15 @@ use App\Http\Controllers\Business\BusinessController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Business\RegisteredBusinessController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ReviewController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/search', [BusinessController::class, 'search'])->name('search');
+Route::get('/bussiness/info/{id}', [BusinessController::class, 'showInfo'])->name('bussiness.info');
 
 Route::middleware('auth')->group(function () {
 
@@ -37,9 +41,11 @@ Route::middleware('auth')->group(function () {
     Route::put('/business/update/{id}', [BusinessController::class, 'update'])->name('business.update');
     Route::post('/business/avaliation', [BusinessController::class, 'avaliation'])->name('business.avaliation');
 
+    Route::post('/review/{business}', [ReviewController::class, 'store'])->name('review');
+    Route::get('/review/form/{id}', [ReviewController::class, 'showReviewForm'])->name('review.form');
+
     // middleware AdminAcess
-    Route::middleware('admin')->group(function () {
-    });
+    Route::middleware('admin')->group(function () {});
 });
 
 require __DIR__ . '/auth.php';

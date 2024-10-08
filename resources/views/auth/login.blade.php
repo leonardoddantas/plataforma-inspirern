@@ -22,6 +22,7 @@
     <form method="POST" action="{{ route('login') }}">
         @csrf
 
+        <input type="hidden" name="redirect_to" value="{{ request('redirect_to') }}">
         <!-- Email Address -->
         <div>
             <x-text-input id="email" class="block mt-1 w-full bg-gray-100" type="email" name="email" :value="old('email')" placeholder="Email" required autofocus autocomplete="username" />
