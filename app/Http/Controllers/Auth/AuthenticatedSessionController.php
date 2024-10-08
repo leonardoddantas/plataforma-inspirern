@@ -28,7 +28,13 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(route('dashboard', absolute: false));
+
+        if ($request->input('redirect_to')) {
+            // Redirecionar para a rota de revisão usando o ID
+            return redirect('review.form/' . $request->input('redirect_to'));
+        } else {
+            return redirect()->intended(route('dashboard', absolute: false));
+        }
     }
 
     /**

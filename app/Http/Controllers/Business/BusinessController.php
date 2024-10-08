@@ -129,4 +129,54 @@ class BusinessController extends Controller
 
         return back();
     }
+
+    public function search(Request $request)
+    {
+
+        $businessName = $request->input('businessName');
+        $category = $request->input('category');
+        $city = $request->input('city');
+        $propertyTypes = $request->input('property_type', []);
+        $ratings = $request->input('rating', []);
+
+        $businesses = Business::query();
+
+        if ($businessName) {
+            $businesses->where('businessName', 'LIKE', "%$businessName%");
+        }
+
+        if ($category) {
+            $businesses->where('category', $category);
+        }
+
+        if ($city) {
+            $businesses->where('city', 'LIKE', "%$city%");
+        }
+
+        if (!empty($propertyTypes)) {
+            $businesses->whereIn('category', $propertyTypes);
+        }
+
+        if (!empty($ratings)) {
+            $businesses->whereIn('rating', $ratings);
+        }
+
+        $filteredBusinesses = $businesses->get();
+
+        return view('search-results', [
+            'businesses' => $filteredBusinesses,
+            'businessName' => $businessName,
+            'category' => $category,
+            'city' => $city,
+            'propertyTypes' => $propertyTypes,
+            'ratings' => $ratings,
+        ]);
+    }
+
+    public function showInfo($id)
+    {
+
+        $business = Business::with(['socialMedias', 'reviews.user'])->findOrFail($id);
+        return view('bussinesses.show', compact('business'));
+    }
 }

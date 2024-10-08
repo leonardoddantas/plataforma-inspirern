@@ -45,6 +45,12 @@ class Business extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function reviews()
+    {
+        return $this->hasMany(Review::class, 'business_id');
+    }
+
+
     public static function rules()
     {
         return [
