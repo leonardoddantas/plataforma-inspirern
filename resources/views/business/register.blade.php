@@ -25,22 +25,22 @@
                 <div class="text-xl mb-4">Informações básicas</div>
 
                 <div class="mb-4">
-                    <x-text-input id="businessName" class="block mt-1 w-full bg-gray-100" type="text" name="businessName" :value="old('businessName')" placeholder="Nome do negócio" required autofocus />
+                    <x-text-input id="businessName" class="block mt-1 w-full bg-gray-100" type="text" name="businessName" :value="old('businessName')" placeholder="Nome do negócio" autofocus />
                     <x-input-error :messages="$errors->get('businessName')" class="mt-2" />
                 </div>
 
                 <div class="mb-4">
-                    <x-text-input id="category" class="block mt-1 w-full bg-gray-100" type="text" name="category" :value="old('category')" placeholder="Categoria" required autocomplete="category" />
+                    <x-text-input id="category" class="block mt-1 w-full bg-gray-100" type="text" name="category" :value="old('category')" placeholder="Categoria" autocomplete="category" />
                     <x-input-error :messages="$errors->get('category')" class="mt-2" />
                 </div>
 
                 <div class="mb-4">
-                    <x-text-input id="cnpj" class="block mt-1 w-full bg-gray-100" type="text" name="cnpj" :value="old('cnpj')" placeholder="CNPJ" autocomplete="cnpj" required maxlength="18"  />
+                    <x-text-input id="cnpj" class="block mt-1 w-full bg-gray-100" type="text" name="cnpj" :value="old('cnpj')" placeholder="CNPJ" autocomplete="cnpj" maxlength="18"  />
                     <x-input-error :messages="$errors->get('cnpj')" class="mt-2" />
                 </div>
 
                 <div class="mb-4">
-                    <textarea id="description" name="description" rows="5" value="old('description')" class="block w-full mt-1 bg-gray-100 border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" placeholder="Digite uma descrição..." required></textarea>
+                    <textarea id="description" name="description" rows="5" value="old('description')" class="block w-full mt-1 bg-gray-100 border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" placeholder="Digite uma descrição" ></textarea>
                     <x-input-error :messages="$errors->get('description')" class="mt-2" />
                 </div>
 
@@ -54,13 +54,13 @@
                 <div class="text-xl mb-4">Informações de Contato</div>
 
                 <div class="mb-4">
-                    <x-text-input id="phone" class="block mt-1 w-full bg-gray-100" type="text" name="phone" :value="old('phone')" placeholder="Telefone" required maxlength="20" />
+                    <x-text-input id="phone" class="block mt-1 w-full bg-gray-100" type="text" name="phone" :value="old('phone')" placeholder="Telefone" maxlength="20"/>
                     <x-input-error :messages="$errors->get('phone')" class="mt-2" />
                 </div>
 
                 <div class="mb-4">
-                    <x-text-input id="email" class="block mt-1 w-full bg-gray-100" type="email" name="email" :value="old('email')" placeholder="Email" required />
-                    <x-input-error :messages="$errors->get('email')" class="mt-2" />
+                    <x-text-input id="email" class="block mt-1 w-full bg-gray-100" type="email" name="email" :value="old('email')" placeholder="Email"/>
+                    <x-input-error :messages="$errors->get('email')" class="mt-2"/>
                 </div>
 
                 <div class="mb-4">
@@ -110,34 +110,34 @@
                 <div class="text-xl mb-4">Localização</div>
 
                 <div class="mb-4">
-                    <x-text-input id="road" class="block mt-1 w-full bg-gray-100" type="text" name="road" :value="old('road')" placeholder="Rua" required />
+                    <x-text-input id="road" class="block mt-1 w-full bg-gray-100" type="text" name="road" :value="old('road')" placeholder="Rua"/>
                     <x-input-error :messages="$errors->get('road')" class="mt-2" />
                 </div>
 
                 <div class="flex justify-between w-full">
                     <div class="mb-4">
-                        <x-text-input id="number" class="block mt-1 w-full bg-gray-100" type="text" name="number" :value="old('number')" placeholder="Número" required />
+                        <x-text-input id="number" class="block mt-1 w-full bg-gray-100" type="text" name="number" :value="old('number')" placeholder="Número"/>
                         <x-input-error :messages="$errors->get('number')" class="mt-2" />
                     </div>
 
                     <div class="mb-4">
-                        <x-text-input id="cep" class="block mt-1 w-full bg-gray-100" type="text" name="cep" :value="old('cep')" placeholder="CEP" required maxlength="9" />
+                        <x-text-input id="cep" class="block mt-1 w-full bg-gray-100" type="text" name="cep" :value="old('cep')" placeholder="CEP" maxlength="9" />
                         <x-input-error :messages="$errors->get('cep')" class="mt-2" />
                     </div>
                 </div>
 
                 <div class="mb-4">
-                    <x-text-input id="neighborhood" class="block mt-1 w-full bg-gray-100" type="text" name="neighborhood" :value="old('neighborhood')" placeholder="Bairro" required />
+                    <x-text-input id="neighborhood" class="block mt-1 w-full bg-gray-100" type="text" name="neighborhood" :value="old('neighborhood')" placeholder="Bairro"/>
                     <x-input-error :messages="$errors->get('neighborhood')" class="mt-2" />
                 </div>
 
                 <div class="mb-4">
-                    <x-text-input id="city" class="block mt-1 w-full bg-gray-100" type="text" name="city" :value="old('city')" placeholder="Cidade" required />
+                    <x-text-input id="city" class="block mt-1 w-full bg-gray-100" type="text" name="city" :value="old('city')" placeholder="Cidade"/>
                     <x-input-error :messages="$errors->get('city')" class="mt-2" />
                 </div>
 
                 <div class="mb-4">
-                    <x-text-input id="state" class="block mt-1 w-full bg-gray-100" type="text" name="state" :value="old('state')" placeholder="Estado" required />
+                    <x-text-input id="state" class="block mt-1 w-full bg-gray-100" type="text" name="state" :value="old('state')" placeholder="Estado"/>
                     <x-input-error :messages="$errors->get('state')" class="mt-2" />
                 </div>
 
@@ -175,7 +175,7 @@
                 </div>
 
                 <div class="mb-4">
-                    <x-text-input id="locationPhoto" class="block mt-1 w-full bg-gray-100" type="file" name="locationPhoto" :value="old('locationPhoto')" placeholder="Fotos do local" required />
+                    <x-text-input id="locationPhoto" class="block mt-1 w-full bg-gray-100" type="file" name="locationPhoto" :value="old('locationPhoto')" placeholder="Fotos do local"/>
                     <x-input-error :messages="$errors->get('locationPhoto')" class="mt-2" />
                 </div>
 
@@ -190,22 +190,22 @@
                 <div class="text-xl mb-4">Informações do Proprietário</div>
 
                 <div class="mb-4">
-                    <x-text-input id="ownerName" class="block mt-1 w-full bg-gray-100" type="text" name="ownerName" :value="old('ownerName')" placeholder="Nome" required />
+                    <x-text-input id="ownerName" class="block mt-1 w-full bg-gray-100" type="text" name="ownerName" :value="old('ownerName')" placeholder="Nome" />
                     <x-input-error :messages="$errors->get('ownerName')" class="mt-2" />
                 </div>
 
                 <div class="mb-4">
-                    <x-text-input id="ownerTelephone" class="block mt-1 w-full bg-gray-100" type="text" name="ownerTelephone" :value="old('ownerTelephone')" placeholder="Telefone" required maxlength="20" />
+                    <x-text-input id="ownerTelephone" class="block mt-1 w-full bg-gray-100" type="text" name="ownerTelephone" :value="old('ownerTelephone')" placeholder="Telefone" maxlength="20" />
                     <x-input-error :messages="$errors->get('ownerTelephone')" class="mt-2" />
                 </div>
 
                 <div class="mb-4">
-                    <x-text-input id="ownerEmail" class="block mt-1 w-full bg-gray-100" type="text" name="ownerEmail" :value="old('ownerEmail')" placeholder="Email" required />
+                    <x-text-input id="ownerEmail" class="block mt-1 w-full bg-gray-100" type="email" name="ownerEmail" :value="old('ownerEmail')" placeholder="Email" />
                     <x-input-error :messages="$errors->get('ownerEmail')" class="mt-2" />
                 </div>
 
                 <div class="mb-4">
-                    <x-text-input id="ownerCpf" class="block mt-1 w-full bg-gray-100" type="text" name="ownerCpf" :value="old('ownerCpf')" placeholder="CPF" required maxlength="14" />
+                    <x-text-input id="ownerCpf" class="block mt-1 w-full bg-gray-100" type="text" name="ownerCpf" :value="old('ownerCpf')" placeholder="CPF" maxlength="14" />
                     <x-input-error :messages="$errors->get('ownerCpf')" class="mt-2" />
                 </div>
 

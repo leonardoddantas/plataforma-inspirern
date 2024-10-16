@@ -4,6 +4,7 @@ use App\Http\Controllers\Business\BusinessController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Business\RegisteredBusinessController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PDFController;
 use App\Http\Controllers\ReviewController;
 use Illuminate\Support\Facades\Route;
 
@@ -43,6 +44,9 @@ Route::middleware('auth')->group(function () {
 
     Route::post('/review/{business}', [ReviewController::class, 'store'])->name('review');
     Route::get('/review/form/{id}', [ReviewController::class, 'showReviewForm'])->name('review.form');
+
+    // PDF
+    Route::get('/pdf', [PDFController::class, 'generatePDF'])->name('pdf');
 
     // middleware AdminAcess
     Route::middleware('admin')->group(function () {});

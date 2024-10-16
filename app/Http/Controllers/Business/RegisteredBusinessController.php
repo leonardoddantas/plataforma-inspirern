@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Business;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\BusinessRequest;
 use App\Models\Business;
 use App\Models\SocialMedia;
 use Illuminate\Http\Request;
@@ -22,9 +23,9 @@ class RegisteredBusinessController extends Controller
      *
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function store(Request $request): View
+    public function store(BusinessRequest $request): View
     {
-        $validatedData = $request->validate(Business::rules());
+        $validatedData = $request->validated();
 
         DB::transaction(function () use ($request, $validatedData) {
             $pathLocalPhoto = $this->handleLocationPhoto($request);
