@@ -6,6 +6,7 @@
                  @auth
                     @if(auth()->user()->type === 'admin')
                         <div class="w-full flex justify-end mt-10">
+
                             <select name="status" id="status" class="mr-4 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
                                 <option value="">Status</option>
                                 <option value="pendente">Pendente</option>
@@ -14,12 +15,36 @@
                             </select>
                             <input type="date" id="date" name="date" class="block border-gray-300 text-lg focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm mr-2">
                             <input type="text" id="search" name="search" class="block border-gray-300 text-lg focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm mr-2" placeholder="Pesquisar">
-                            <x-primary-button class="w-1/6" id="searchButton">
+                            <x-primary-button class="w-1/6 mr-2" id="searchButton">
                                 {{ __('Pesquisar') }}
                             </x-primary-button>
+
+                            <x-primary-button onclick="toggleModal(true)">
+                                {{ __('Gerar Relatório') }}
+                            </x-primary-button>
+
                         </div>
                     @endif
                 @endauth
+
+                <!-- Modal -->
+                <div id="filterModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
+                    <div class="bg-white p-6 rounded shadow-lg w-1/3">
+                        <h2 class="text-xl mb-4 font-semibold">Escolha o tipo de relatório</h2>
+                        <form action="{{ route('pdf') }}" method="GET">
+                            <select name="status" class="w-full mb-4 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
+                                <option value="">Todos</option>
+                                <option value="pendente">Pendentes</option>
+                                <option value="aprovado">Aprovados</option>
+                                <option value="reprovado">Reprovados</option>
+                            </select>
+                            <div class="flex justify-end">
+                                <x-secondary-button type="button" onclick="toggleModal(false)">Cancelar</x-secondary-button>
+                                <x-primary-button type="submit" class="ml-2">Gerar</x-primary-button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
 
                 <div class="w-full overflow-x-auto flex justify-center items-center mt-3 mb-20">
                     <table class="w-full bg-white border text-center shadow-md">
@@ -108,5 +133,12 @@
                 window.location.href = query;
             });
         </script>
+        
+        <script>
+            function toggleModal(show) {
+                document.getElementById('filterModal').classList.toggle('hidden', !show);
+            }
+        </script>
+
     </x-slot>
 </x-app-layout>
