@@ -25,7 +25,7 @@
           <li class="hover:text-blue-950 hover:font-semibold transition"><a href="http://">Hospedagens</a></li>
           <li class="hover:text-blue-950 hover:font-semibold transition"><a href="http://">Cidades</a></li>
           @if (Auth::check())
-            <li class="hover:text-blue-950 hover:font-semibold transition"><a href="{{route('dashboard')}}">Painel de Controle</a></li>
+            <li class="hover:text-blue-950 hover:font-semibold transition"><a href="{{route('profile.edit')}}">Painel de Controle</a></li>
           @else
             <li class="hover:text-blue-950 hover:font-semibold transition"><a href="{{route('login')}}">Login</a></li>
           @endif

@@ -49,8 +49,8 @@
         <div class="mt-4">
             <select name="type" id="type" class="block mt-1 w-full p-3 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
                 <option value="" disabled selected>Selecione o tipo de usuário</option>
-                <option value="tourist" {{ old('type') == 'tourist' ? 'selected' : '' }}>Turista</option>
-                <option value="merchant" {{ old('type') == 'merchant' ? 'selected' : '' }}>Comerciante</option>
+                <option value="turista" {{ old('type') == 'turista' ? 'selected' : '' }}>Turista</option>
+                <option value="comerciante" {{ old('type') == 'comerciante' ? 'selected' : '' }}>Comerciante</option>
             </select>
             <x-input-error :messages="$errors->get('type')" class="mt-2" />
         </div>

@@ -19,9 +19,12 @@ Route::middleware('auth')->group(function () {
 
     // Dashboard
     Route::get('/dashboard/admin', [DashboardController::class, 'index'])->name('admin.dashboard');
+
     Route::get('/dashboard', function () {
         if (auth()->user()->type === 'admin') {
             return redirect(route('admin.dashboard'));
+        } else if (auth()->user()->type === 'turista') {
+            return view('welcome');
         } else {
             return view('user.dashboard');
         }
