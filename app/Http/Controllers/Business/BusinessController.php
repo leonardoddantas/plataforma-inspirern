@@ -25,17 +25,19 @@ class BusinessController extends Controller
         }
 
         if (!empty($search)) {
-
             $cleanedSearch = preg_replace('/[^0-9]/', '', $search);
-            // ^\d{3}\.\d{3}\.\d{3}\-\d{2}$/ cpf
-            // /^\d{2}\.\d{3}\.\d{3}\/\d{4}\-\d{2}$/ cnpj
-            if (preg_match('/^\d{11}$/', $cleanedSearch)) {
-                $query->where('ownerCpf', $cleanedSearch);
-            } elseif (preg_match('/^\d{14}$/', $cleanedSearch)) {
-                $query->where('cnpj', $cleanedSearch);
-            } else {
-                $query->where('businessName', 'like', "{$search}%");
-            }
+
+            $query->where(function ($q) use ($search, $cleanedSearch) {
+                // Buscar por CNPJ ou CPF
+                if (preg_match('/^\d{11}$/', $cleanedSearch)) {
+                    $q->orWhere('ownerCpf', $cleanedSearch);
+                } elseif (preg_match('/^\d{14}$/', $cleanedSearch)) {
+                    $q->orWhere('cnpj', $cleanedSearch);
+                }
+                // Buscar por nome ou categoria
+                $q->orWhere('businessName', 'like', "%{$search}%")
+                    ->orWhere('category', 'like', "%{$search}%");
+            });
         }
 
         if (!empty($status)) {

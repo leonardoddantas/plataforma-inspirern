@@ -14,6 +14,8 @@
 
    <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+    <link rel="shortcut icon" href="{{asset('storage/img/favicon.ico')}}" type="image/x-icon">
 </head>
 <body>
     <div class="h-screen flex justify-center items-center">

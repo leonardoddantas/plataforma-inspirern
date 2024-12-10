@@ -36,13 +36,30 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
-        $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
-            'city' => ['required', 'string'],
-            'type' => ['required', 'string'],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
-        ]);
+        $request->validate(
+            [
+                'name' => ['required', 'string', 'max:255'],
+                'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
+                'city' => ['required', 'string'],
+                'type' => ['required', 'string'],
+                'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            ],
+            [
+                'name.required' => 'O nome é obrigatório.',
+                'name.string' => 'O nome deve ser uma string válida.',
+                'name.max' => 'O nome não pode exceder 255 caracteres.',
+                'email.required' => 'O e-mail é obrigatório.',
+                'email.string' => 'O e-mail deve ser uma string válida.',
+                'email.lowercase' => 'O e-mail deve estar em letras minúsculas.',
+                'email.email' => 'O e-mail deve ser um endereço de e-mail válido.',
+                'email.max' => 'O e-mail não pode exceder 255 caracteres.',
+                'email.unique' => 'O e-mail já está em uso.',
+                'city.required' => 'A cidade é obrigatória.',
+                'type.required' => 'O tipo de usuário é obrigatório.',
+                'password.required' => 'A senha é obrigatória.',
+                'password.confirmed' => 'A confirmação da senha não coincide.',
+            ]
+        );
 
         $user = User::create([
             'name' => $request->name,

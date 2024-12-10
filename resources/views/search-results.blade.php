@@ -4,11 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>INSPIRERN - Pesquisar</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="{{asset('storage/img/favicon.ico')}}" type="image/x-icon">
 </head>
 <body>
 
@@ -16,13 +17,18 @@
     <header class="bg-blue-950">
         <div class="relative z-10 container mx-auto px-4 h-full">
         <nav class="flex flex-row items-center justify-between h-20 text-xl text-slate-50">
-            <a href="http://">Logo</a>
+            <a href="http://"><img src="{{asset('storage/img/logo_inspirern_white.png')}}" alt="Logo do INSPIRERN" class="w-20"></a>
             <ul class="flex flex-row items-center justify-center space-x-4">
-            <li class="hover:text-blue-500 transition"><a href="http://">Home</a></li>
-            <li class="hover:text-blue-500 hover:font-semibold transition"><a href="http://">Restaurantes</a></li>
-            <li class="hover:text-blue-500 hover:font-semibold transition"><a href="http://">Pontos Turistícos</a></li>
-            <li class="hover:text-blue-500 hover:font-semibold transition"><a href="http://">Hospedagens</a></li>
-            <li class="hover:text-blue-500 hover:font-semibold transition"><a href="http://">Cidades</a></li>
+                <li class="hover:text-blue-950 transition"><a href="http://">Home</a></li>
+                <li class="hover:text-blue-950 hover:font-semibold transition"><a href="http://">Restaurantes</a></li>
+                <li class="hover:text-blue-950 hover:font-semibold transition"><a href="http://">Pontos Turistícos</a></li>
+                <li class="hover:text-blue-950 hover:font-semibold transition"><a href="http://">Hospedagens</a></li>
+                <li class="hover:text-blue-950 hover:font-semibold transition"><a href="http://">Cidades</a></li>
+                @if (Auth::check())
+                    <li class="hover:text-blue-950 hover:font-semibold transition"><a href="{{route('profile.edit')}}">Perfil</a></li>
+                @else
+                    <li class="hover:text-blue-950 hover:font-semibold transition"><a href="{{route('login')}}">Login</a></li>
+                @endif
             </ul>
         </nav>
 

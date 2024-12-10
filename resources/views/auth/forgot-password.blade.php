@@ -1,6 +1,22 @@
 <x-guest-layout>
+     <x-slot name="subheader">
+        Acesse sua conta e vamos explorar o RN
+    </x-slot>
+    
+    <x-slot name="linkURL">
+        {{route('register')}}
+    </x-slot>
+
+    <x-slot name="linkText">
+        Cadastrar-se
+    </x-slot>
+
+    <x-slot name="header">
+        Redefina sua senha
+    </x-slot>
+
     <div class="mb-4 text-sm text-gray-600">
-        {{ __('Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.') }}
+        {{ __('Esqueceu sua senha? Sem problemas. Basta nos informar seu endereço de e-mail e enviaremos um e-mail com um link de redefinição de senha que permitirá que você escolha uma nova.') }}
     </div>
 
     <!-- Session Status -->
@@ -18,7 +34,7 @@
 
         <div class="flex items-center justify-end mt-4">
             <x-primary-button>
-                {{ __('Email Password Reset Link') }}
+                {{ __('Enviar link de redifinição de senha') }}
             </x-primary-button>
         </div>
     </form>
